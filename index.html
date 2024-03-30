@@ -3,105 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        *, *:before, *:after {
+            box-sizing: border-box;
+            font-family: "Trebuchet MS", sans-serif;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            padding: 20px;
+            background: #222;
+            color: #fff;
+            font-size: 24px;
+        }
+
+        a {
+            color: #ff0000;
+        }
+
+        .title {
+            margin-top: 0;
+        }
+
+        .controls {
+            display: flex;
+            margin-bottom: 20px;
+            flex-direction: column;
+        }
+
+        .control {
+            margin-bottom: 10px;
+            background: #444;
+            padding: 10px;
+            border-radius: 10px;
+            width: 700px;
+        }
+
+        .control-label {
+            margin-bottom: 10px;
+            display: block;
+            color: #ccc;
+            font-style: italic;;
+        }
+
+        #apiKeyInput {
+            font-size: 24px;
+            width: 100%
+        }
+
+        #voiceSelect {
+            font-size: 24px;
+            width: 100%;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>
+    <h1 class="title">
         Simple STTTS
     </h1>
     <p>
         This only works in google chrome. If you don't have your streamelements api key, please check the <a href="https://github.com/swolekat/simple-sttts">readme</a>
     </p>
-    <input type="password" placeholder="Your api key" onchange="onApiChange()" id="apiKeyInput">
-<!--    <input type="text" placeholder="Caption Ninja " onchange="onCaptionNinjaChange">-->
-    <select onchange="voiceChange()" id="voiceSelect">
-        <option value="Filiz">Filiz</option>
-        <option value="Astrid">Astrid</option>
-        <option value="Tatyana">Tatyana</option>
-        <option value="Maxim">Maxim</option>
-        <option value="Carmen">Carmen</option>
-        <option value="Ines">Ines</option>
-        <option value="Cristiano">Cristiano</option>
-        <option value="Vitoria">Vitoria</option>
-        <option value="Ricardo">Ricardo</option>
-        <option value="Maja">Maja</option>
-        <option value="Jan">Jan</option>
-        <option value="Jacek">Jacek</option>
-        <option value="Ewa">Ewa</option>
-        <option value="Ruben">Ruben</option>
-        <option value="Lotte">Lotte</option>
-        <option value="Liv">Liv</option>
-        <option value="Seoyeon">Seoyeon</option>
-        <option value="Takumi">Takumi</option>
-        <option value="Mizuki">Mizuki</option>
-        <option value="Giorgio">Giorgio</option>
-        <option value="Carla">Carla</option>
-        <option value="Bianca">Bianca</option>
-        <option value="Karl">Karl</option>
-        <option value="Dora">Dora</option>
-        <option value="Mathieu">Mathieu</option>
-        <option value="Celine">Celine</option>
-        <option value="Chantal">Chantal</option>
-        <option value="Penelope">Penelope</option>
-        <option value="Miguel">Miguel</option>
-        <option value="Mia">Mia</option>
-        <option value="Enrique">Enrique</option>
-        <option value="Conchita">Conchita</option>
-        <option value="Geraint">Geraint</option>
-        <option value="Salli">Salli</option>
-        <option value="Matthew">Matthew</option>
-        <option value="Kimberly">Kimberly</option>
-        <option value="Kendra">Kendra</option>
-        <option value="Justin">Justin</option>
-        <option value="Joey">Joey</option>
-        <option value="Joanna">Joanna</option>
-        <option value="Ivy">Ivy</option>
-        <option value="Raveena">Raveena</option>
-        <option value="Aditi">Aditi</option>
-        <option value="Emma">Emma</option>
-        <option value="Brian" selected>Brian</option>
-        <option value="Amy">Amy</option>
-        <option value="Russell">Russell</option>
-        <option value="Nicole">Nicole</option>
-        <option value="Vicki">Vicki</option>
-        <option value="Marlene">Marlene</option>
-        <option value="Hans">Hans</option>
-        <option value="Naja">Naja</option>
-        <option value="Mads">Mads</option>
-        <option value="Gwyneth">Gwyneth</option>
-        <option value="Zhiyu">Zhiyu</option>
-        <option value="Tracy">Tracy</option>
-        <option value="Danny">Danny</option>
-        <option value="Huihui">Huihui</option>
-        <option value="Yaoyao">Yaoyao</option>
-        <option value="Kangkang">Kangkang</option>
-        <option value="HanHan">HanHan</option>
-        <option value="Zhiwei">Zhiwei</option>
-        <option value="Asaf">Asaf</option>
-        <option value="An">An</option>
-        <option value="Stefanos">Stefanos</option>
-        <option value="Filip">Filip</option>
-        <option value="Ivan">Ivan</option>
-        <option value="Heidi">Heidi</option>
-        <option value="Herena">Herena</option>
-        <option value="Kalpana">Kalpana</option>
-        <option value="Hemant">Hemant</option>
-        <option value="Matej">Matej</option>
-        <option value="Andika">Andika</option>
-        <option value="Rizwan">Rizwan</option>
-        <option value="Lado">Lado</option>
-        <option value="Valluvar">Valluvar</option>
-        <option value="Linda">Linda</option>
-        <option value="Heather">Heather</option>
-        <option value="Sean">Sean</option>
-        <option value="Michael">Michael</option>
-        <option value="Karsten">Karsten</option>
-        <option value="Guillaume">Guillaume</option>
-        <option value="Pattara">Pattara</option>
-        <option value="Jakub">Jakub</option>
-        <option value="Szabolcs">Szabolcs</option>
-        <option value="Hoda">Hoda</option>
-        <option value="Naayf">Naayf</option>
-    </select>
+    <div class="controls">
+        <div class="control">
+            <label class="control-label">
+                API Key
+            </label>
+            <div class="control-content">
+                <input type="password" placeholder="Your api key" onchange="onApiChange()" id="apiKeyInput">
+            </div>
+        </div>
+        <div class="control">
+            <label class="control-label">
+                Voice
+            </label>
+            <div class="control-content">
+                <select onchange="voiceChange()" id="voiceSelect">
+                    <option value="Filiz">Filiz</option>
+                    <option value="Astrid">Astrid</option>
+                    <option value="Tatyana">Tatyana</option>
+                    <option value="Maxim">Maxim</option>
+                    <option value="Carmen">Carmen</option>
+                    <option value="Ines">Ines</option>
+                    <option value="Cristiano">Cristiano</option>
+                    <option value="Vitoria">Vitoria</option>
+                    <option value="Ricardo">Ricardo</option>
+                    <option value="Maja">Maja</option>
+                    <option value="Jan">Jan</option>
+                    <option value="Jacek">Jacek</option>
+                    <option value="Ewa">Ewa</option>
+                    <option value="Ruben">Ruben</option>
+                    <option value="Lotte">Lotte</option>
+                    <option value="Liv">Liv</option>
+                    <option value="Seoyeon">Seoyeon</option>
+                    <option value="Takumi">Takumi</option>
+                    <option value="Mizuki">Mizuki</option>
+                    <option value="Giorgio">Giorgio</option>
+                    <option value="Carla">Carla</option>
+                    <option value="Bianca">Bianca</option>
+                    <option value="Karl">Karl</option>
+                    <option value="Dora">Dora</option>
+                    <option value="Mathieu">Mathieu</option>
+                    <option value="Celine">Celine</option>
+                    <option value="Chantal">Chantal</option>
+                    <option value="Penelope">Penelope</option>
+                    <option value="Miguel">Miguel</option>
+                    <option value="Mia">Mia</option>
+                    <option value="Enrique">Enrique</option>
+                    <option value="Conchita">Conchita</option>
+                    <option value="Geraint">Geraint</option>
+                    <option value="Salli">Salli</option>
+                    <option value="Matthew">Matthew</option>
+                    <option value="Kimberly">Kimberly</option>
+                    <option value="Kendra">Kendra</option>
+                    <option value="Justin">Justin</option>
+                    <option value="Joey">Joey</option>
+                    <option value="Joanna">Joanna</option>
+                    <option value="Ivy">Ivy</option>
+                    <option value="Raveena">Raveena</option>
+                    <option value="Aditi">Aditi</option>
+                    <option value="Emma">Emma</option>
+                    <option value="Brian" selected>Brian</option>
+                    <option value="Amy">Amy</option>
+                    <option value="Russell">Russell</option>
+                    <option value="Nicole">Nicole</option>
+                    <option value="Vicki">Vicki</option>
+                    <option value="Marlene">Marlene</option>
+                    <option value="Hans">Hans</option>
+                    <option value="Naja">Naja</option>
+                    <option value="Mads">Mads</option>
+                    <option value="Gwyneth">Gwyneth</option>
+                    <option value="Zhiyu">Zhiyu</option>
+                    <option value="Tracy">Tracy</option>
+                    <option value="Danny">Danny</option>
+                    <option value="Huihui">Huihui</option>
+                    <option value="Yaoyao">Yaoyao</option>
+                    <option value="Kangkang">Kangkang</option>
+                    <option value="HanHan">HanHan</option>
+                    <option value="Zhiwei">Zhiwei</option>
+                    <option value="Asaf">Asaf</option>
+                    <option value="An">An</option>
+                    <option value="Stefanos">Stefanos</option>
+                    <option value="Filip">Filip</option>
+                    <option value="Ivan">Ivan</option>
+                    <option value="Heidi">Heidi</option>
+                    <option value="Herena">Herena</option>
+                    <option value="Kalpana">Kalpana</option>
+                    <option value="Hemant">Hemant</option>
+                    <option value="Matej">Matej</option>
+                    <option value="Andika">Andika</option>
+                    <option value="Rizwan">Rizwan</option>
+                    <option value="Lado">Lado</option>
+                    <option value="Valluvar">Valluvar</option>
+                    <option value="Linda">Linda</option>
+                    <option value="Heather">Heather</option>
+                    <option value="Sean">Sean</option>
+                    <option value="Michael">Michael</option>
+                    <option value="Karsten">Karsten</option>
+                    <option value="Guillaume">Guillaume</option>
+                    <option value="Pattara">Pattara</option>
+                    <option value="Jakub">Jakub</option>
+                    <option value="Szabolcs">Szabolcs</option>
+                    <option value="Hoda">Hoda</option>
+                    <option value="Naayf">Naayf</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>
+            If you like this tool, maybe check out my <a href="https://www.twitch.tv/swolekat">Twitch</a> or <a href="https://www.youtube.com/channel/UCa2U_ZRJC1a0Fk6DcITyinA">Youtube</a>
+        </div>
+
+    </div>
     <script>
         const apiKeyInput = document.getElementById('apiKeyInput');
         const voiceSelect = document.getElementById('voiceSelect');
