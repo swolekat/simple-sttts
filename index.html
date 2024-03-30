@@ -5,6 +5,94 @@
     <title>Title</title>
 </head>
 <body>
+    <h1>
+        Simple STTTS
+    </h1>
+    <p>
+        This only works in google chrome. If you don't have your streamelements api key, please check the <a href="https://github.com/swolekat/simple-sttts">readme</a>
+    </p>
+    <input type="password" placeholder="Your api key" onchange="onApiChange()" id="apiKeyInput">
+<!--    <input type="text" placeholder="Caption Ninja " onchange="onCaptionNinjaChange">-->
+    <select onchange="voiceChange()" id="voiceSelect">
+        <option value="Chabrungus" selected >Chabrungus</option>
+        <option value="Mizuki" selected >Mizuki</option>
+    </select>
+    <script>
+        const apiKeyInput = document.getElementById('apiKeyInput');
+        const voiceSelect = document.getElementById('voiceSelect');
+        let apiKey = '';
+        // let captionNinjaRoom = '';
+        let voice = 'Chanbrungus';
+        let audioIsPlaying = false;
+        let queue = [];
 
+        const sayMessage = (fullMessage) => {
+            if(audioIsPlaying){
+                queue.push(fullMessage);
+                return;
+            }
+            const fixedMessage = fullMessage.toLowerCase();
+            const url = `http://api.streamelements.com/kappa/v2/speech?voice=${voice}&text=${encodeURI(fixedMessage)}&key=${apiKey}`
+            const myAudio = new Audio(url);
+            myAudio.volume = 1;
+            myAudio.play();
+            audioIsPlaying = true;
+            myAudio.addEventListener('ended', () => {
+                audioIsPlaying = false;
+                if(queue.length === 0){
+                    return;
+                }
+                const nextMessage = queue.shift();
+                sayMessage(nextMessage);
+            });
+        }
+
+        const init = () => {
+            apiKey = localStorage.getItem('simplesttts-api') || '';
+            apiKeyInput.value = apiKey;
+            voice = localStorage.getItem('simplesttts-voice') || 'Chabrungus';
+            voiceSelect.value = voice;
+
+            const recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+
+            recognition.onresult = function(event) {
+                if(!event.results){
+                    return;
+                }
+                let message = '';
+                for(let x = 0; x < event.results.length; x++){
+                    const result = event.results[x];
+                    if(!result.isFinal){
+                        return;
+                    }
+                    message += result[0].transcript;
+                }
+                console.log(message);
+                sayMessage(message);
+            }
+
+            recognition.onend = function () {
+                recognition.start();
+            };
+
+            recognition.start();
+        }
+
+        init();
+
+        const onApiChange = () => {
+            apiKey = apiKeyInput.value;
+            window.localStorage.setItem('simplesttts-api', apiKey);
+        };
+
+        const voiceChange = () => {
+            voice = voiceSelect.value;
+            window.localStorage.setItem('simplesttts-voice', voice);
+        };
+
+    </script>
 </body>
 </html>
