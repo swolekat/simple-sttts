@@ -60,6 +60,16 @@
             width: 100%;
         }
 
+        .start-button {
+            background: #176c17;
+            color: #fff;
+            font-size: 36px;
+            border: 0;
+            padding: 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
         .footer {
             position: absolute;
             bottom: 0;
@@ -79,7 +89,10 @@
         Simple STTTS
     </h1>
     <p>
-        This only works in google chrome. If you don't have your streamelements api key, please check the <a href="https://github.com/swolekat/simple-sttts">readme</a>
+        This only works in google chrome.
+    </p>
+    <p>
+        If you don't have your streamelements api key, please check the <a href="https://github.com/swolekat/simple-sttts">readme</a>
     </p>
     <div class="controls">
         <div class="control">
@@ -187,6 +200,9 @@
             </div>
         </div>
     </div>
+    <button id="startButton" class="start-button" onclick="onStart()">
+        Start Listening
+    </button>
 
     <div class="footer">
         <div>
@@ -202,6 +218,8 @@
         let voice = 'Brian';
         let audioIsPlaying = false;
         let queue = [];
+        const recognition = new webkitSpeechRecognition();
+        let started = false;
 
         const sayMessage = (fullMessage) => {
             if(audioIsPlaying){
@@ -230,7 +248,6 @@
             voice = localStorage.getItem('simplesttts-voice') || 'Chabrungus';
             voiceSelect.value = voice;
 
-            const recognition = new webkitSpeechRecognition();
             recognition.continuous = false;
             recognition.lang = 'en-US';
             recognition.interimResults = false;
@@ -255,7 +272,6 @@
                 recognition.start();
             };
 
-            recognition.start();
         }
 
         init();
@@ -268,6 +284,14 @@
         const voiceChange = () => {
             voice = voiceSelect.value;
             window.localStorage.setItem('simplesttts-voice', voice);
+        };
+
+        const onStart = () => {
+            if(started){
+                return;
+            }
+            recognition.start();
+            started = true;
         };
 
     </script>
